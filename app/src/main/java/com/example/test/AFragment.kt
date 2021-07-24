@@ -23,6 +23,18 @@ class AFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentABinding = DataBindingUtil.inflate(inflater , R.layout.fragment_a, container, false)
 
+        binding.btnOk.setOnClickListener(){
+            val name:String = binding.tfName.text.toString()
+
+            //unsafe method to pass data, unsafe args passing
+            //val bundle = bundleOf(Pair("personName",name)) //"personName" = parameter name
+            //can pass in multiple parameter bundleOf(Pair("xxx",xx),Pair("xxx",xx))
+            //Navigation.findNavController(it).navigate(R.id.action_AFragment_to_BFragment, bundle)
+
+            //safe method to pass data, safe args passing
+            val action = AFragmentDirections.actionAFragmentToBFragment(name)
+            Navigation.findNavController(it).navigate(action)
+        }
 
         return binding.root
     }
